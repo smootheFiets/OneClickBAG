@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
+  author="smootheFiets"
+  version="0.1_2021-05-09"
+  shortdescription="One click settings BAG"
+  nl.shortdescription="Één-klik-instellingen BAG import"
+  description="Shortcut presets to use with a single click, adapted to
+	       Dutch BAG imports"
+  nl.description="Snelle presets, met één klik te gebruiken, voor
+		  gebruik tijdens BAG imports">
+
+  <group name="One click BAG"  nl.name="Één klik BAG">
+    <item name="Geometry (delete source:date and start_date)"
+	  type="closedway,multipolygon">
+      <key key="source:date" />
+      <key key="start_date" />
+    </item>
+
+    <item name="Status (delete building, construction, source:date and
+		start_date)" type="closedway,multipolygon">
+      <key key="building"/>
+      <key key="construction"/>
+      <key key="source:date" />
+      <key key="start_date" />
+    </item>
+
+    <item name="Mest (manually change ref:bag to ref:bag:old!)"
+	  type="closedway">
+      <key key="building" value="storage_tank" />
+      <key key="man_made" value="storage_tank" />
+      <key key="source:date" value="2020" />
+      <key key="source" value="BAG;PDOK" />
+    </item>
+      
+  </group>
+</presets>
