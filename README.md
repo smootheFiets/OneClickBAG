@@ -10,3 +10,4 @@ Mest: to be used on storage tanks that are still present in PDOK imagery but del
 ## Version history
 * 0.1, 2021-05-09: first version on Github
 * 0.2, 2021-05-12: allow 'geometry' and 'status' on (address) nodes, too
+* 0.3, 2021-09-06: add bagChecks.validator.mapcss
