@@ -23,3 +23,4 @@ An error is thrown at address nodes that are part of a way; this can happen acci
 * 0.2, 2021-05-12: allow 'geometry' and 'status' on (address) nodes, too
 * 0.3, 2021-09-06: add bagChecks.validator.mapcss
 * 0.4, 2021-09-09: expand bagChecks.validator.mapcss, update README.md
+* 0.5, 2021-09-10: improve timestamp-check on non-BAG buildings

@@ -23,7 +23,7 @@ area["ref:bag"][building=no][inside("NL")]
 /* will catch buildings with timestamps before 2020, i.e., thru 2019/12/31 */
 /* hard-wired age limit to before 2020; adapt later as needed */
 /* I couldn't find a way to make timestamp search relative to today, e.g., objects older than two years.  Feature request in JOSM? */
-area[building][!"ref:bag"][inside("NL")][JOSM_search("timestamp:/2020")]{
+area[building][!"ref:bag"][inside("NL")][JOSM_search("timestamp:/2020")]!:modified{
    throwWarning: tr("Non-BAG building hasn't been touched in a while; is it still there?");
 }  
 /* syntax copied from https://github.com/majkaz/JOSM-styles/blob/master/age.mapcss */
