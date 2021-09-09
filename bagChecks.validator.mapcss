@@ -1,23 +1,41 @@
-area[building][building!=static_caravan][building!=houseboat][!start_date]["ref:bag"] {
-   throwWarning: tr("BAG-building without start_date.  Could be a houseboat or a static caravan."); 
- }
+meta{
+   title: "BAG imports (NL)";
+   version: "0.1";
+   description: "Additions to JOSM validator that should be useful for BAG imports in NL";
+   author: "smootheFiets";
+}
+   
 
-area[building][building!=construction][construction]{
-   throwError: tr("Spurious construction tag in building");
-   fixRemove: "construction";
+area[building][building!=static_caravan][building!=houseboat][!start_date]["ref:bag"][inside("NL")]  {
+   throwWarning: tr("BAG-building without start_date.  Could be a houseboat or a static caravan."); 
 }
 
-area[building][building!=proposed][proposed]{
-   throwError: tr("Spurious proposed tag in building");
-   fixRemove: "proposed";
+node["ref:bag"][inside("NL")]{
+   throwError: tr("Node with ref:bag; ref:bag is reserved to building outlines");
+}
+
+area["ref:bag"][!building][landuse!=houseboat][landuse!=static_caravan][inside("NL")],
+area["ref:bag"][building=no][inside("NL")]
+{
+   throwWarning: tr("Building tag missing?  ref:bag without building, nor landuse=houseboat/static_caravan");
 }
 
 /* will catch buildings with timestamps before 2020, i.e., thru 2019/12/31 */
-area[building][!"ref:bag"][JOSM_search("timestamp:/2020")]
-{
+/* hard-wired age limit to before 2020; adapt later as needed */
+/* I couldn't find a way to make timestamp search relative to today, e.g., objects older than two years.  Feature request in JOSM? */
+area[building][!"ref:bag"][inside("NL")][JOSM_search("timestamp:/2020")]{
    throwWarning: tr("Non-BAG building hasn't been touched in a while; is it still there?");
 }  
-/* hard-wired age limit to before 2020; adapt later as needed */
 /* syntax copied from https://github.com/majkaz/JOSM-styles/blob/master/age.mapcss */
-/* I couldn't find a way to make timestamp search relative to today, e.g., objects older than two years.  Feature request in JOSM? */
+
+
+/* accept address nodes on a building outline -- some mappers tag entrances that way */
+way[!building] node["addr:housenumber"][inside("NL")]{
+   throwError: tr("Address node on a way; should be inside a building!");
+}
+
+
+node["addr:housenumber"] ⊈ area:closed2["ref:bag"][inside("NL")][building=~/house|apartments/]{
+   throwWarning: tr("Building=house/apartments contains no address node");
+}
 
