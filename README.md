@@ -1,12 +1,12 @@
 # OneClickBAG
 Quick JOSM presets for BAG imports that work with a single click.  If you don't know what BAG imports are, this preset is probably not for you.  Also: `bagChecks.validator.mapcss` providing validator checks useful for maintaining the BAG import in NL.
 
-#### Tagging preset (mostly obsolete)
-Geometry: delete key/value pairs source:date and start_date. Use on existing way before merging with newly imported way with updated geometry.
+#### Tagging preset 
+'Is er nog': to be used on buildings that are still visible in PDOK, although they've been deleted from the BAG.  Replaces `ref:bag` with `ref:bag:old`, and sets `source=BAG;PDOK`, `source:date=2020` (to be updated once PDOK imagery from 2021+  becomes available).  This preset opens a GUI window, but no user input is requested (nor useful, typically).  This is due to a technical limitation of JOSM.
 
-Status: as geometry, delete building and construction, too.  Use on existing way before merging with newly imported way with updated status (typically: building=construction --> building=*)
+'Mest': to be used on storage tanks (I mostly see them on farms, hence the name).  The preset sets `building=storage_tank`, `man_made=storage_tank`.
 
-Mest: to be used on storage tanks that are still present in PDOK imagery but deleted from the BAG.  This appears to happen frequently, at least in the area I'm familiar with.  Manually change ref:BAG to ref:BAG:old (or is there a way to make the preset make that change?  I couldn't find one), then apply this preset.  It will set `building=storage_tank`, `man_made=storage_tank`, `source="BAG;PDOK"`, `source:date=2020` (to be updated once PDOK imagery from 2021+ becomes available).
+Status: deletes tags `building`, `construction`, `source:date` and `start_date`. Use on existing way before merging with newly imported way with updated status (typically: building=construction --> building=*)
 
 #### Validator
 Throws warnings at a couple BAG problems I've encountered in the wild:
@@ -24,3 +24,4 @@ An error is thrown at address nodes that are part of a way; this can happen acci
 * 0.3, 2021-09-06: add bagChecks.validator.mapcss
 * 0.4, 2021-09-09: expand bagChecks.validator.mapcss, update README.md
 * 0.5, 2021-09-10: improve timestamp-check on non-BAG buildings
+* 0.6, 2021-09-12: remove 'geometry' (validator fix takes care of this), add 'is er nog', reduce scope of 'mest'

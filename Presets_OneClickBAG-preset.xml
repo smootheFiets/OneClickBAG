@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
   author="smootheFiets"
-  version="0.2_2021-05-12"
+  version="0.6_2021-09-12"
   shortdescription="One click settings BAG"
   nl.shortdescription="Één-klik-instellingen BAG import"
   description="Shortcut presets to use with a single click, adapted to
@@ -10,12 +10,7 @@
 		  gebruik tijdens BAG imports">
 
   <group name="One click BAG"  nl.name="Één klik BAG">
-    <item name="Geometry (delete source:date and start_date)"
-	  type="node,closedway,multipolygon">
-      <key key="source:date" />
-      <key key="start_date" />
-    </item>
-
+    
     <item name="Status (delete building, construction, source:date and
 		start_date)" type="node,closedway,multipolygon">
       <key key="building"/>
@@ -24,12 +19,21 @@
       <key key="start_date" />
     </item>
 
-    <item name="Mest (manually change ref:bag to ref:bag:old!)"
-	  type="closedway">
+    <item name="Is er nog (ref:bag-->ref:bag:old; source=BAG;PDOK)"
+          type="closedway,multipolygon">
+      <label text="Pand verwijderd in de BAG, maar bestaat nog;
+	default's niet veranderen, graag." />
+      <text key="ref:bag:old" text="Dit wordt ref:bag:old"
+	    value_template="{ref:bag}" />
+      <text key="ref:bag" text="Dit wordt ref:bag" value_template="" />
+      <key key="source" value="BAG;PDOK" />
+      <key key="source:date" value="2020" />
+    </item>
+    <!-- See https://forum.openstreetmap.org/viewtopic.php?pid=840707 -->
+
+    <item name="Mest"  type="closedway">
       <key key="building" value="storage_tank" />
       <key key="man_made" value="storage_tank" />
-      <key key="source:date" value="2020" />
-      <key key="source" value="BAG;PDOK" />
     </item>
       
   </group>
