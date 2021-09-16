@@ -1,6 +1,6 @@
 meta{
    title: "BAG imports (NL)";
-   version: "0.1";
+   version: "0.7";
    description: "Additions to JOSM validator that should be useful for BAG imports in NL";
    author: "smootheFiets";
 }
@@ -34,8 +34,4 @@ way[!building] node["addr:housenumber"][inside("NL")]{
    throwError: tr("Address node on a way; should be inside a building!");
 }
 
-
-node["addr:housenumber"] ⊈ area:closed2["ref:bag"][inside("NL")][building=~/house|apartments/]{
-   throwWarning: tr("Building=house/apartments contains no address node");
-}
 
