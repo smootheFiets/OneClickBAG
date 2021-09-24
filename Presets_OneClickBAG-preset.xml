@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
   author="smootheFiets"
-  version="0.7_2021-09-16"
+  version="0.8_2021-09-24"
   shortdescription="One click settings BAG"
   nl.shortdescription="Één-klik-instellingen BAG import"
   description="Shortcut presets to use with a single click, adapted to
@@ -11,9 +11,11 @@
 
   <group name="One click BAG"  nl.name="Één klik BAG">
     
-    <item name="Status (remove tags building and
-		source:date)" type="node,closedway,multipolygon">
+    <item name="Status (removes building tag)" type="closedway,multipolygon">
       <key key="building"/>
+    </item>
+
+    <item name="Timeless (removes source:date tag)" type="node">
       <key key="source:date" />
     </item>
 

@@ -1,20 +1,36 @@
 meta{
    title: "BAG imports (NL)";
-   version: "0.7";
+   version: "0.8";
    description: "Additions to JOSM validator that should be useful for BAG imports in NL";
-   author: "smootheFiets";
+   authors: "smootheFiets, Sander H";
 }
-   
+
+
+area[/^(building|building:part|man_made)$/] ⊉ node[addr:housenumber][!entrance] {
+  throwWarning: tr("Address not inside building");
+}
+/* entrance: some mappers add entrances (with address info) to building outline */
+/* man_made: for man_made=tower */
+
 
 area[building][building!=static_caravan][building!=houseboat][!start_date]["ref:bag"][inside("NL")]  {
    throwWarning: tr("BAG-building without start_date.  Could be a houseboat or a static caravan."); 
 }
 
-node["ref:bag"][inside("NL")]{
+/* power=generator: windmolens mogen best node's zijn, staan wel in de BAG */
+node["ref:bag"][inside("NL")][power!=generator]{
    throwError: tr("Node with ref:bag; ref:bag is reserved to building outlines");
 }
 
-area["ref:bag"][!building][landuse!=houseboat][landuse!=static_caravan][inside("NL")],
+node[power=generator]["generator:source"=wind] ⊆ area[building]{
+   throwWarning: tr("Wind turbine contained in building");
+}
+
+node[building][inside("NL")]{
+   throwError: tr("Node with building tag; reserved to building outlines");
+}
+
+area["ref:bag"][!building][!"building:part"][landuse!=houseboat][landuse!=static_caravan][inside("NL")],
 area["ref:bag"][building=no][inside("NL")]
 {
    throwWarning: tr("Building tag missing?  ref:bag without building, nor landuse=houseboat/static_caravan");
@@ -30,7 +46,7 @@ area[building][!"ref:bag"][inside("NL")][JOSM_search("timestamp:/2020")]!:modifi
 
 
 /* accept address nodes on a building outline -- some mappers tag entrances that way */
-way[!building] node["addr:housenumber"][inside("NL")]{
+way[!building] node["addr:housenumber"][amenity!=parking][inside("NL")]{
    throwError: tr("Address node on a way; should be inside a building!");
 }
 
