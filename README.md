@@ -30,3 +30,4 @@ An error is thrown at address nodes that are part of a way; this can happen acci
 * 0.6, 2021-09-12: remove 'geometry' (validator fix takes care of this), add 'is er nog', reduce scope of 'mest'
 * 0.7_2021-09-16: trim down 'status' preset, eliminate validator warning against houses w/o address node
 * 0.8_2021-09-24: Validator: address outside building / wind turbines in building. Preset: separate status and timeless
+* 0.9_2021-11-11, validator: improve address checks for entrances and wind turbines

@@ -1,16 +1,17 @@
 meta{
    title: "BAG imports (NL)";
-   version: "0.8";
+   version: "0.9";
    description: "Additions to JOSM validator that should be useful for BAG imports in NL";
    authors: "smootheFiets, Sander H";
 }
 
 
-area[/^(building|building:part|man_made)$/] ⊉ node[addr:housenumber][!entrance] {
+area[/^(building|building:part|man_made)$/] ⊉ node[addr:housenumber][!entrance][power!=generator] {
   throwWarning: tr("Address not inside building");
 }
 /* entrance: some mappers add entrances (with address info) to building outline */
 /* man_made: for man_made=tower */
+/* power=generator: some wind-turbines (which are mapped as solo nodes) have a BAG address */
 
 
 area[building][building!=static_caravan][building!=houseboat][!start_date]["ref:bag"][inside("NL")]  {
@@ -46,7 +47,7 @@ area[building][!"ref:bag"][inside("NL")][JOSM_search("timestamp:/2020")]!:modifi
 
 
 /* accept address nodes on a building outline -- some mappers tag entrances that way */
-way[!building] node["addr:housenumber"][amenity!=parking][inside("NL")]{
+way[!building] node["addr:housenumber"][amenity!=parking][!entrance][inside("NL")]{
    throwError: tr("Address node on a way; should be inside a building!");
 }
 
