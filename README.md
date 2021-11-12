@@ -2,7 +2,8 @@
 Quick JOSM presets for BAG imports that work with a single click.  If you don't know what BAG imports are, this preset is probably not for you.  Also: `bagChecks.validator.mapcss` providing validator checks useful for maintaining the BAG import in NL.
 
 #### Tagging preset 
-'Is er nog': to be used on buildings that are still visible in PDOK, although they've been deleted from the BAG.  Replaces `ref:bag` with `ref:bag:old`, and sets `source=BAG;PDOK`, `source:date=2020` (to be updated once PDOK imagery from 2021+  becomes available).  This preset opens a GUI window, but no user input is requested (nor useful, typically).  This is due to a technical limitation of JOSM.
+'Is er nog': to be used on buildings that are still visible in PDOK, although they've been deleted from the BAG.  Replaces `ref:bag` with `ref:bag:old`, and sets `source=BAG;PDOK`, `source:date=2021` (to be updated once PDOK imagery from 2022+  becomes available).  This preset opens a GUI window, but no user input is requested (nor useful, typically).  This is due to a technical limitation of JOSM.
+This works reliably for one object at a time.  With several objects simultaneously, it used to work at some point but no longer appears to (?).
 
 'Mest': to be used on storage tanks (I mostly see them on farms, hence the name).  The preset sets `building=storage_tank`, `man_made=storage_tank`.
 
@@ -19,7 +20,7 @@ Throws warnings at a couple BAG problems I've encountered in the wild:
 * Non-BAG buildings that haven't been touched since 2020-01-01 (date subject to change)
 * Buildings containing a wind turbine; these are increasingly included in the BAG as circular buildings but are mapped as nodes.  I tend to copy the BAG tags (plus, possibly, the BAG-imported address) onto the turbine node, then delete the building polygon.
 
-An error is thrown at address nodes that are part of a way; this can happen accidentally when iD users pan the map.
+An error is thrown at address nodes that are part of a way (except if that way is a building and the address node has `entrace=*`); this can happen accidentally when iD users pan the map.
 
 ## Version history
 * 0.1, 2021-05-09: first version on Github
@@ -31,3 +32,4 @@ An error is thrown at address nodes that are part of a way; this can happen acci
 * 0.7_2021-09-16: trim down 'status' preset, eliminate validator warning against houses w/o address node
 * 0.8_2021-09-24: Validator: address outside building / wind turbines in building. Preset: separate status and timeless
 * 0.9_2021-11-11, validator: improve address checks for entrances and wind turbines
+* 0.10_2021-11-13, preset: update PDOK date to 2021; tweak README

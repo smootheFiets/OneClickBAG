@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
   author="smootheFiets"
-  version="0.8_2021-09-24"
+  version="0.10_2021-11-13"
   shortdescription="One click settings BAG"
   nl.shortdescription="Één-klik-instellingen BAG import"
   description="Shortcut presets to use with a single click, adapted to
@@ -27,7 +27,7 @@
 	    value_template="{ref:bag}" />
       <text key="ref:bag" text="Dit wordt ref:bag" value_template="" />
       <key key="source" value="BAG;PDOK" />
-      <key key="source:date" value="2020" />
+      <key key="source:date" value="2021" />
     </item>
     <!-- See https://forum.openstreetmap.org/viewtopic.php?pid=840707 -->
 
