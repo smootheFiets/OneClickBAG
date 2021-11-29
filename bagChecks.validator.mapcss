@@ -1,6 +1,6 @@
 meta{
    title: "BAG imports (NL)";
-   version: "0.9";
+   version: "0.11";
    description: "Additions to JOSM validator that should be useful for BAG imports in NL";
    authors: "smootheFiets, Sander H";
 }
@@ -10,7 +10,7 @@ area[/^(building|building:part|man_made)$/] ⊉ node[addr:housenumber][!entrance
   throwWarning: tr("Address not inside building");
 }
 /* entrance: some mappers add entrances (with address info) to building outline */
-/* man_made: for man_made=tower */
+/* man_made: for man_made=tower or storage_tank */
 /* power=generator: some wind-turbines (which are mapped as solo nodes) have a BAG address */
 
 
@@ -31,24 +31,28 @@ node[building][inside("NL")]{
    throwError: tr("Node with building tag; reserved to building outlines");
 }
 
-area["ref:bag"][!building][!"building:part"][landuse!=houseboat][landuse!=static_caravan][inside("NL")],
+area["ref:bag"][!building][!"building:part"][landuse!~/^(houseboat|static_caravan)$/][man_made!~/^(storage_tank|silo|tower)$/][inside("NL")],
 area["ref:bag"][building=no][inside("NL")]
 {
-   throwWarning: tr("Building tag missing?  ref:bag without building, nor landuse=houseboat/static_caravan");
+   throwWarning: tr("Building tag missing?  ref:bag without building, landuse=houseboat/static_caravan, nor man_made=storage_tank/silo/tower");
 }
 
-/* will catch buildings with timestamps before 2020, i.e., thru 2019/12/31 */
+/* Flag buildings (and "buildings") with timestamps before 2020, i.e., thru 2019/12/31 */
 /* hard-wired age limit to before 2020; adapt later as needed */
-/* I couldn't find a way to make timestamp search relative to today, e.g., objects older than two years.  Feature request in JOSM? */
-area[building][!"ref:bag"][inside("NL")][JOSM_search("timestamp:/2020")]!:modified{
+/* I couldn't find a way to make timestamp search relative to today, e.g., objects older than two years.  Feature requested in JOSM: https://josm.openstreetmap.de/ticket/21429 */
+area[building][!"ref:bag"][inside("NL")][JOSM_search("timestamp:/2020")]!:modified,
+area[man_made=~/^(storage_tank|silo)$/][!"ref:bag"][inside("NL")][JOSM_search("timestamp:/2020")]!:modified
+{
    throwWarning: tr("Non-BAG building hasn't been touched in a while; is it still there?");
 }  
 /* syntax copied from https://github.com/majkaz/JOSM-styles/blob/master/age.mapcss */
 
 
-/* accept address nodes on a building outline -- some mappers tag entrances that way */
 way[!building] node["addr:housenumber"][amenity!=parking][!entrance][inside("NL")]{
    throwError: tr("Address node on a way; should be inside a building!");
 }
+/* accept address nodes on a building outline if they're entraces -- some mappers tag entrances that way */
 
-
+way[man_made=~/^(storage_tank|tower|silo)$/][building][building!=no]{
+   throwWarning: tr("Discouraged combo: building with man_made=storage_tank|tower|silo");
+}

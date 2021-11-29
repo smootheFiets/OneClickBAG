@@ -16,8 +16,8 @@ Throws warnings at a couple BAG problems I've encountered in the wild:
 * address outside a building (expanding on the check offered by Sander H)
 * BAG buildings without `start_date` (should it really be a `static_caravan` or a `houseboat`?)
 * Nodes with `ref:bag` (should be on the building outline)
-* Areas with `ref:bag` without `building`, `landuse=houseboat` or `landuse=static_caravan` (building tag missing?)
-* Non-BAG buildings that haven't been touched since 2020-01-01 (date subject to change)
+* Areas with `ref:bag` without `building`, `landuse=houseboat|static_caravan` nor `man_made=storage_tank|tower` (building tag missing?)
+* Non-BAG buildings that haven't been touched since 2020-01-01 (date subject to change).  Also check pseudo-buildings man_made=storage_tank/silo.
 * Buildings containing a wind turbine; these are increasingly included in the BAG as circular buildings but are mapped as nodes.  I tend to copy the BAG tags (plus, possibly, the BAG-imported address) onto the turbine node, then delete the building polygon.
 
 An error is thrown at address nodes that are part of a way (except if that way is a building and the address node has `entrace=*`); this can happen accidentally when iD users pan the map.
@@ -33,3 +33,4 @@ An error is thrown at address nodes that are part of a way (except if that way i
 * 0.8_2021-09-24: Validator: address outside building / wind turbines in building. Preset: separate status and timeless
 * 0.9_2021-11-11, validator: improve address checks for entrances and wind turbines
 * 0.10_2021-11-13, preset: update PDOK date to 2021; tweak README
+* 0.11_2021-11-28: storage_tanks no longer use building; adapt validator 

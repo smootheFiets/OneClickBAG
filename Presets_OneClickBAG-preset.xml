@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
   author="smootheFiets"
-  version="0.10_2021-11-13"
+  version="0.11_2021-11-28"
   shortdescription="One click settings BAG"
   nl.shortdescription="Één-klik-instellingen BAG import"
   description="Shortcut presets to use with a single click, adapted to
@@ -29,12 +29,13 @@
       <key key="source" value="BAG;PDOK" />
       <key key="source:date" value="2021" />
     </item>
-    <!-- See https://forum.openstreetmap.org/viewtopic.php?pid=840707 -->
+    <!-- See https://forum.openstreetmap.org/viewtopic.php?pid=73803 -->
 
     <item name="Mest"  type="closedway">
-      <key key="building" value="storage_tank" />
+      <key key="building" value="" />
       <key key="man_made" value="storage_tank" />
     </item>
+    <!-- See https://forum.openstreetmap.org/viewtopic.php?id=74338 -->
       
   </group>
 </presets>
